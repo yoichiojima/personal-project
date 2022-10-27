@@ -1,0 +1,51 @@
+services:
+  notebook:
+    container_name: notebook
+    build:
+      context: .
+      dockerfile: ./notebook/docker/Dockerfile
+    ports: 
+      - 8888:8888
+    volumes: 
+      - ./:/app
+    tty: true
+
+  pipeline:
+    container_name: pipeline
+    build:
+      context: .
+      dockerfile: ./pipeline/docker/Dockerfile
+    ports:
+      - 8082:8082
+    volumes: 
+      - ./:/app
+
+  db:
+    container_name: db
+    build:
+      context: .
+      dockerfile: ./db/docker/Dockerfile
+    volumes:
+      - ./:/app
+    expose: 
+      - 5432
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: ./nginx/docker/Dockerfile
+    ports: 
+      - 81:80
+    volumes: 
+      - ./:/app
+
+  rest:
+    container_name: rest
+    build:
+      context: .
+      dockerfile: ./rest/docker/Dockerfile
+    ports: 
+      - 5001:5000
+    volumes: 
+      - ./:/app
