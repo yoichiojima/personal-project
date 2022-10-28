@@ -2,3 +2,5 @@
 __pycache__
 spotipy_auth.py
 .venv
+db/data/*
+.cache

@@ -8,6 +8,7 @@ services:
       - 8888:8888
     volumes: 
       - ./:/app
+    restart: always
     tty: true
 
   pipeline:
@@ -19,16 +20,8 @@ services:
       - 8082:8082
     volumes: 
       - ./:/app
-
-  db:
-    container_name: db
-    build:
-      context: .
-      dockerfile: ./db/docker/Dockerfile
-    volumes:
-      - ./:/app
-    expose: 
-      - 5432
+    restart: always
+    tty: true
 
   nginx:
     container_name: nginx
@@ -39,6 +32,8 @@ services:
       - 81:80
     volumes: 
       - ./:/app
+    restart: always
+    tty: true
 
   rest:
     container_name: rest
@@ -49,3 +44,35 @@ services:
       - 5001:5000
     volumes: 
       - ./:/app
+    restart: always
+    tty: true
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGPASSWORD: postgres
+      POSTGRES_DB: db
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 82:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: yoichiojima@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+    volumes:
+      - ./db/pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:
+  pgadmin:
