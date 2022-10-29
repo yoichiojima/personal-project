@@ -2,3 +2,4 @@ luigi
 numpy
 pandas
 spotipy
+pytest

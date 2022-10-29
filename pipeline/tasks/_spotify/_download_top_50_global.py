@@ -5,6 +5,8 @@ from datetime import datetime
 
 from spotipy_auth import spotipy_auth
 spotipy_auth()
+from google_auth import google_auth
+google_auth()
 
 def download_top_50_global():
     spotify = spotipy.Spotify(client_credentials_manager = SpotifyClientCredentials())

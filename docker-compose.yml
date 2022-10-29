@@ -35,11 +35,11 @@ services:
     restart: always
     tty: true
 
-  rest:
-    container_name: rest
+  api:
+    container_name: api
     build:
       context: .
-      dockerfile: ./rest/docker/Dockerfile
+      dockerfile: ./api/docker/Dockerfile
     ports: 
       - 5001:5000
     volumes: 

@@ -1,6 +1,11 @@
 FROM python:3
 
-COPY ./pipeline/requirements.txt /app/pipeline/requirements.txt
-RUN pip install -r /app/pipeline/requirements.txt
+COPY libs /app/libs
+COPY setup.py /app/setup.py
+RUN pip install --upgrade pip
+RUN pip install -e /app
 
-WORKDIR /app/pipeline
+COPY pipeline/requirements.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt
+
+COPY pipeline/tasks /app/tasks
