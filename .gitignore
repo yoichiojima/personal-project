@@ -6,3 +6,4 @@ google_auth.py
 .venv
 db/data/*
 .cache
+*.egg-info

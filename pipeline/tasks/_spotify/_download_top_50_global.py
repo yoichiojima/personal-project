@@ -5,6 +5,7 @@ from datetime import datetime
 
 from spotipy_auth import spotipy_auth
 spotipy_auth()
+
 from google_auth import google_auth
 google_auth()
 
@@ -33,7 +34,7 @@ def download_top_50_global():
 
     timestamp = datetime.now().strftime('%Y-%m-%d')
 
-    df.to_csv(f'/app/bucket/spotify/global_top_50/{timestamp}.csv', 
+    df.to_csv(f'gs://yo-personal-project/spotify/global_top_50/{timestamp}.csv', 
                index = False, 
                encoding = 'utf_8_sig')
 
