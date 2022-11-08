@@ -10,6 +10,8 @@ services:
       - ./:/app
     restart: always
     tty: true
+    networks:
+      - network-1
 
 
   notebook:
@@ -50,11 +52,13 @@ services:
       context: .
       dockerfile: ./api/docker/Dockerfile
     ports: 
-      - 5001:5000
+      - 8000:8000
     volumes: 
       - ./:/app
     restart: always
     tty: true
+    networks:
+      - network-1
 
   postgres:
     image: postgres:latest
@@ -87,3 +91,7 @@ services:
 volumes:
   postgres:
   pgadmin:
+
+networks:
+  network-1:
+    driver: bridge
