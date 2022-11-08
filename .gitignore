@@ -7,3 +7,4 @@ google_auth.py
 db/data/*
 .cache
 *.egg-info
+node_modules
