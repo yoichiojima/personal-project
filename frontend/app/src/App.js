@@ -29,6 +29,29 @@ const App = () => {
     gcp: ['BigQuery', 'CloudRun', 'Cloud Storage'],
     other: ['Docker', 'SQL', 'Git', 'JavaScript', 'Linux', 'React'],
   };
+
+  const job_1 = [
+    '自社データプラットフォーム企画立案・設計・実装',
+    'データパイプライン構築',
+    '関連部署と連携しながらの指標制定等、データのエンリッチメント',
+    'BIツールを用いたダッシュボードの作成(Google LookerStudio)',
+    '管理会計手法の確立',
+    '統計的手法を用いた人事評価プロセスの確立',
+    '街開発の企画提案',
+    'データ活用人材の育成',
+  ];
+
+  const job_2 = [
+    '商業施設データの構築・ダッシュボード作成',
+    'データ最適化による業務オペレーションの改善・効率化',
+  ];
+
+  const certifications = [
+    ['2019', '7', 'TOEIC 公開テスト スコア 850点'],
+    ['2021', '9', 'Google Cloud BigData and Machine LearningFoundamentals修了'],
+    ['2012', '12', '普通自動車第一種運転免許　取得'],
+  ];
+
   const theme = extendTheme({
     fonts: {
       heading: 'Noto Sans JP 100',
@@ -38,9 +61,9 @@ const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Container>
+      <Container py={10}>
         <Stack spacing={10}>
-          <Container pt={10}>
+          <Container>
             <Grid templateColumns="repeat(5, 1fr)" gap={4}>
               <GridItem colSpan={3}>
                 <Heading as="h1" size="lg">
@@ -80,29 +103,17 @@ const App = () => {
               2021/4 - 現在 : 株式会社水野本社 経営企画部
             </Heading>
             <UnorderedList mb={4} fontSize={13}>
-              <ListItem>
-                自社データプラットフォーム企画立案・設計・実装
-              </ListItem>
-              <ListItem>データパイプライン構築</ListItem>
-              <ListItem>
-                関連部署と連携しながらの指標制定等、データのエンリッチメント
-              </ListItem>
-              <ListItem>
-                BIツールを用いたダッシュボードの作成(Google LookerStudio)
-              </ListItem>
-              <ListItem>管理会計手法の確立</ListItem>
-              <ListItem>統計的手法を用いた人事評価プロセスの確立</ListItem>
-              <ListItem>街開発の企画提案</ListItem>
-              <ListItem>データ活用人材の育成</ListItem>
+              {job_1.map(item => (
+                <ListItem>{item}</ListItem>
+              ))}
             </UnorderedList>
             <Heading as="h2" size="sm" mb={2}>
               2018/4 - 2021/3 : 東山遊園株式会社 星が丘テラス営業部
             </Heading>
             <UnorderedList fontSize={13}>
-              <ListItem>商業施設データの構築・ダッシュボード作成</ListItem>
-              <ListItem>
-                データ最適化による業務オペレーションの改善・効率化
-              </ListItem>
+              {job_2.map(item => (
+                <ListItem>{item}</ListItem>
+              ))}
             </UnorderedList>
           </Container>
 
@@ -121,6 +132,7 @@ const App = () => {
                 <Tbody>
                   <Tr>
                     <Td>Python</Td>
+
                     <td>
                       <Wrap>
                         {skills.python.map(skill => (
@@ -174,24 +186,13 @@ const App = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  <Tr>
-                    <Td>2019</Td>
-                    <Td>7</Td>
-                    <Td>TOEIC 公開テスト スコア 850点</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>2021</Td>
-                    <Td>9</Td>
-                    <Td>
-                      Google Cloud BigData and Machine Learning
-                      Foundamentals修了
-                    </Td>
-                  </Tr>
-                  <Tr>
-                    <Td>2012</Td>
-                    <Td>12</Td>
-                    <Td>普通自動車第一種運転免許　取得</Td>
-                  </Tr>
+                  {certifications.map(certification => (
+                    <Tr>
+                      <Td>{certification[0]}</Td>
+                      <Td>{certification[1]}</Td>
+                      <Td>{certification[2]}</Td>
+                    </Tr>
+                  ))}
                 </Tbody>
               </Table>
             </TableContainer>
