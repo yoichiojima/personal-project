@@ -124,7 +124,9 @@ const App = () => {
                     <td>
                       <Wrap>
                         {skills.python.map(skill => (
-                          <Tag m={1} fontSize={10}>{skill}</Tag>
+                          <Tag m={1} fontSize={10}>
+                            {skill}
+                          </Tag>
                         ))}
                       </Wrap>
                     </td>
@@ -134,7 +136,9 @@ const App = () => {
                     <td>
                       <Wrap>
                         {skills.gcp.map(skill => (
-                          <Tag m={1} fontSize={10}>{skill}</Tag>
+                          <Tag m={1} fontSize={10}>
+                            {skill}
+                          </Tag>
                         ))}
                       </Wrap>
                     </td>
@@ -144,7 +148,9 @@ const App = () => {
                     <td>
                       <Wrap>
                         {skills.other.map(skill => (
-                          <Tag m={1} fontSize={10}>{skill}</Tag>
+                          <Tag m={1} fontSize={10}>
+                            {skill}
+                          </Tag>
                         ))}
                       </Wrap>
                     </td>
