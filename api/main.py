@@ -16,9 +16,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
 
 @app.get("/global_top_50")
 async def global_top_50(date: str):
