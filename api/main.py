@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from libs import get_global_top_50
+from libs.get_global_top_50 import get_global_top_50
 
 app = FastAPI()
 
@@ -19,3 +19,7 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+@app.get("/global_top_50")
+async def global_top_50(date: str):
+    return get_global_top_50(date)
