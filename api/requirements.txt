@@ -1,1 +1,3 @@
 fastapi[all]
+pandas
+google-cloud-storage
