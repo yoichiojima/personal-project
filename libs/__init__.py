@@ -1,1 +1,3 @@
-from .spotipy_auth import spotipy_auth
+import _spotify
+import _auth
+import _storage

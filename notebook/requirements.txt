@@ -5,3 +5,5 @@ matplotlib
 seaborn
 scikit-learn
 spotipy
+gcsfs
+google-cloud-storage
