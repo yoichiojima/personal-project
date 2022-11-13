@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   ChakraProvider,
-  Text
+  Text, 
+  theme
 } from '@chakra-ui/react';
 
 const App = () => {
