@@ -7,4 +7,4 @@ db/data/*
 .cache
 *.egg-info
 node_modules
-google-auth.json
+google_auth.json
