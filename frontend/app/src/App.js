@@ -28,24 +28,22 @@ const App = () => {
     getGlobalTop50();
   }, []);
 
+
   return (
     <ChakraProvider theme={theme}>
       <Container>
         <TableContainer>
           <Table variant="simple">
-            <TableCaption>Imperial to metric conversion factors</TableCaption>
+            <TableCaption>my portfolio</TableCaption>
             <Thead>
               <Tr>
-                {globalTop50.columns && globalTop50.columns.map((column) => (
-                  <Th>{column}</Th>
-                ))}
+              {globalTop50.columns.map((col) => (
+                <Th>{col}</Th>
+              ))}
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
-                {globalTop50.data.map((item) => (
-                  <Td>{item}</Td>
-                ))}
               </Tr>
             </Tbody>
           </Table>
