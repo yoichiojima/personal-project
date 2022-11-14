@@ -20,7 +20,8 @@ app.add_middleware(
 
 logger = logging.getLogger(__name__)
 logging.Formatter()
-logger.warning('warning')
+logger.warning("warning")
+
 
 @app.get("/")
 async def root():
@@ -30,6 +31,7 @@ async def root():
 @app.get("/global_top_50")
 async def global_top_50(date: str):
     return get_global_top_50(date)
+
 
 @app.get("/artist")
 async def artist(artist_id: str):
