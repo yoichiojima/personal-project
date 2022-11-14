@@ -21,16 +21,16 @@ class Logger:
         self.logger.addHandler(stream_handler)
 
     def info(self, msg):
-        return self.logger.info(msg)
+        self.logger.info(msg)
 
     def debug(self, msg):
-        return self.logger.debug(msg)
+        self.logger.debug(msg)
 
     def warning(self, msg):
-        return self.logger.warning(msg)
+        self.logger.warning(msg)
 
     def error(self, msg):
-        return self.logger.error(msg)
+        self.logger.error(msg)
 
     def critical(self, msg):
-        return self.logger.critical(msg)
+        self.logger.critical(msg)
