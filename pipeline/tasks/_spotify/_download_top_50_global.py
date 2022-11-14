@@ -3,12 +3,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
 from datetime import datetime
 
-from spotipy_auth import spotipy_auth
+from _auth.google_auth import google_auth
+from _spotify.spotipy_auth import spotipy_auth
 
 spotipy_auth()
-
-from google_auth import google_auth
-
 google_auth()
 
 

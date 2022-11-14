@@ -12,6 +12,8 @@ RUN pip install -r /app/requirements.txt
 
 COPY pipeline/tasks/_spotify /app/tasks
 
-WORKDIR /app/pipeline
+WORKDIR /app/tasks
 
-CMD luigid
+CMD python3 -m luigi \
+            --module spotify DownloadGlobalTop50 \
+            --local-scheduler

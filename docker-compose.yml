@@ -33,6 +33,9 @@ services:
       dockerfile: ./pipeline/docker/Dockerfile
     ports:
       - 8082:8082
+    volumes: 
+      - ./:/app
+    tty: true
 
   nginx:
     container_name: nginx
