@@ -10,8 +10,6 @@ RUN pip install -e /app
 COPY pipeline/requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
-COPY pipeline/tasks/_spotify /app/tasks
-
 WORKDIR /app/pipeline
 
 CMD luigid
