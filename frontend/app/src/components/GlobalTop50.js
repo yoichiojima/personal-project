@@ -25,7 +25,7 @@ const GlobalTop50 = () => {
         });
     };
     getGlobalTop50();
-  }, [data]);
+  }, []);
 
   return (
     <TableContainer>
