@@ -1,6 +1,6 @@
 #!bin/bash
 
-echo `dirname`
+echo `dirname $0`
 
 git add .
 git commit -m $1
