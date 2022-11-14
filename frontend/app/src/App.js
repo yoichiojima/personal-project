@@ -13,38 +13,51 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
+import axios from 'axios';
 
 const App = () => {
-  const [globalTop50, setGlobalTop50] = useState([]);
+  const [columns, setColumns] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const getGlobalTop50 = async () => {
-      const response = await fetch(
-        'http://localhost:8000/global_top_50?date=2022-11-13'
-      );
-      const data = await response.json();
-      setGlobalTop50(data)
+      axios
+        .get('http://localhost:8000/global_top_50?date=2022-11-13')
+        .then(res => {
+          setColumns(res.data.columns);
+          setData(res.data.data);
+
+          data.map(d => {
+            console.log(d);
+          });
+        });
     };
     getGlobalTop50();
   }, []);
-
 
   return (
     <ChakraProvider theme={theme}>
       <Container>
         <TableContainer>
           <Table variant="simple">
-            <TableCaption>my portfolio</TableCaption>
+            <TableCaption>global top 50 on spotify</TableCaption>
             <Thead>
               <Tr>
-              {globalTop50.columns.map((col) => (
-                <Th>{col}</Th>
-              ))}
+                {columns.map((col, key) => (
+                  <Th key={key}>{col}</Th>
+                ))}
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-              </Tr>
+              {data.map((d, index) => (
+                <Tr key={index}>
+                  <Td>{d[0]}</Td>
+                  <Td>{d[1]}</Td>
+                  <Td>{d[2]}</Td>
+                  <Td>{d[3]}</Td>
+                  <Td>{d[4]}</Td>
+                </Tr>
+              ))}
             </Tbody>
           </Table>
         </TableContainer>
