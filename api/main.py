@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from libs.get_global_top_50 import get_global_top_50
@@ -35,5 +36,5 @@ async def artist(artist_id: str):
 
 
 @app.get("/artists_in_global_top_50/")
-async def artists_in_global_top_50():
-    return get_artists_in_global_top_50()
+async def artists_in_global_top_50(date: str):
+    return get_artists_in_global_top_50(datetime.strptime(date, "%Y-%m-%d"))
