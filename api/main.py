@@ -1,8 +1,7 @@
-import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from libs.get_global_top_50 import get_global_top_50
-from libs.artist import artist
+from libs.get_artist import get_artist
 
 app = FastAPI()
 
@@ -18,21 +17,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-logger = logging.getLogger(__name__)
-logging.Formatter()
-logger.warning("warning")
-
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World!"}
+    return {"message": "I'm alive!"}
 
 
-@app.get("/global_top_50")
+@app.get("/global_top_50/")
 async def global_top_50(date: str):
     return get_global_top_50(date)
 
 
-@app.get("/artist")
+@app.get("/artist/")
 async def artist(artist_id: str):
-    return artist(artist_id)
+    return get_artist(artist_id)

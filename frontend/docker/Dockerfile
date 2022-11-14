@@ -1,5 +1,5 @@
 FROM node:latest
 
-RUN npm install --save-dev --save-exact prettier
+WORKDIR /app/frontend/app
 
-WORKDIR /app/frontend
+CMD npm start
