@@ -12,6 +12,7 @@ def download_blob_into_memory(bucket_name, blob_name):
 
     return contents
 
+
 if __name__ == "__main__":
     download_blob_into_memory(
         bucket_name=sys.argv[1],

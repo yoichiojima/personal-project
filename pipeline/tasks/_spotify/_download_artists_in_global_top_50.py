@@ -12,9 +12,10 @@ logger = Logger()
 
 spotipy_auth()
 
+
 def _get_artists_in_global_top_50() -> list:
-    sp = spotipy.Spotify(client_credentials_manager = SpotifyClientCredentials())
-    playlist_tracks = sp.playlist_tracks(playlist_id = "37i9dQZEVXbMDoHDwVN2tF", limit = 50)
+    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
+    playlist_tracks = sp.playlist_tracks(playlist_id="37i9dQZEVXbMDoHDwVN2tF", limit=50)
 
     track_artists = [
         item["track"]["album"]["artists"] for item in playlist_tracks["items"]
@@ -29,7 +30,7 @@ def _get_artists_in_global_top_50() -> list:
 
 def get_artists_in_global_top_50() -> list:
     ids = [i["id"] for i in _get_artists_in_global_top_50()]
-    sp = spotipy.Spotify(client_credentials_manager = SpotifyClientCredentials())
+    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
     return [sp.artist(_id) for _id in ids]
 
 
@@ -41,9 +42,9 @@ def download_artists_in_global_top_50():
     project_id = get_project_id()
     timestamp = datetime.now().strftime("%Y-%m-%d")
     upload_blob_from_memory(
-        bucket_name = project_id,
-        contents = json_to_upload,
-        destination_blob_name = f"spotify/artists_in_global_top_50/{timestamp}.json",
+        bucket_name=project_id,
+        contents=json_to_upload,
+        destination_blob_name=f"spotify/artists_in_global_top_50/{timestamp}.json",
     )
     logger.info("artists_in_global_top_50.json uploaded to GCS")
 

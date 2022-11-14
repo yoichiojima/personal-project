@@ -16,6 +16,7 @@ class DownloadGlobalTop50(luigi.Task):
     def run(self):
         download_top_50_global()
 
+
 class DownloadArtistGlobalTop50(luigi.Task):
     def output(self):
         return GCSTarget(
