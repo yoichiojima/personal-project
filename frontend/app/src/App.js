@@ -6,7 +6,6 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
@@ -37,31 +36,29 @@ const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Container>
-        <TableContainer>
-          <Table variant="simple">
-            <TableCaption>global top 50 on spotify</TableCaption>
-            <Thead>
-              <Tr>
-                {columns.map((col, key) => (
-                  <Th key={key}>{col}</Th>
-                ))}
-              </Tr>
-            </Thead>
-            <Tbody>
-              {data.map((d, index) => (
-                <Tr key={index}>
-                  <Td>{d[0]}</Td>
-                  <Td>{d[1]}</Td>
-                  <Td>{d[2]}</Td>
-                  <Td>{d[3]}</Td>
-                  <Td>{d[4]}</Td>
-                </Tr>
+      <TableContainer>
+        <Table variant="simple">
+          <TableCaption>global top 50 on spotify</TableCaption>
+          <Thead>
+            <Tr>
+              {columns.map((col, key) => (
+                <Th key={key}>{col}</Th>
               ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-      </Container>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {data.map((d, index) => (
+              <Tr key={index}>
+                <Td>{d[0]}</Td>
+                <Td>{d[1]}</Td>
+                <Td>{d[2]}</Td>
+                <Td>{d[3]}</Td>
+                <Td>{d[4]}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
     </ChakraProvider>
   );
 };
