@@ -1,25 +1,23 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Text } from '@chakra-ui/react';
 
 const ArtistsAppearedInGlobalTop50 = () => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     const getArtistsAppearedInGlobalTop50 = async () => {
       axios
         .get('http://localhost:8000/artists_appeared_in_global_top_50/')
         .then(res => {
-          setData(res.data);
+          setData(res.data[0]);
+          console.log(data);
         });
     };
     getArtistsAppearedInGlobalTop50();
-    console.log(data);
   }, []);
 
-  return (
-    <div>
-      <h1>Artists Appeared In Global Top 50</h1>
-    </div>
-  );
+  return <Text>{data.name}</Text>;
 };
 
 export default ArtistsAppearedInGlobalTop50;

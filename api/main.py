@@ -2,9 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from libs.get_global_top_50 import get_global_top_50
 from libs.get_artist import get_artist
-from libs.get_artists_appeared_in_global_top_50 import (
-    get_artists_appeared_in_global_top_50,
-)
+from libs.get_artists_in_global_top_50 import get_artists_in_global_top_50
 
 app = FastAPI()
 
@@ -36,6 +34,6 @@ async def artist(artist_id: str):
     return get_artist(artist_id)
 
 
-@app.get("/artists_appeared_in_global_top_50/")
-async def artists_appeared_in_global_top_50():
-    return get_artists_appeared_in_global_top_50()
+@app.get("/artists_in_global_top_50/")
+async def artists_in_global_top_50():
+    return get_artists_in_global_top_50()
