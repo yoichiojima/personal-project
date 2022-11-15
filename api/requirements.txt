@@ -1,6 +1,9 @@
 fastapi[all]
 pandas
+
 google-cloud-storage
+google-cloud-logging
 gcsfs
 fsspec
+
 spotipy

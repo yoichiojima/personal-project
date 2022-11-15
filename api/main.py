@@ -21,20 +21,20 @@ app.add_middleware(
 
 
 @app.get("/")
-async def root():
+async def root() -> dict:
     return {"message": "I'm alive!"}
 
 
 @app.get("/global_top_50/")
-async def global_top_50(date: str):
+async def global_top_50(date: str) -> list:
     return get_global_top_50(date)
 
 
 @app.get("/artist/")
-async def artist(artist_id: str):
+async def artist(artist_id: str) -> dict:
     return get_artist(artist_id)
 
 
-@app.get("/artists_in_global_top_50/")
-async def artists_in_global_top_50(date: str):
+@app.get("/artists-in-global-top-50/")
+async def artists_in_global_top_50(date: str) -> dict:
     return get_artists_in_global_top_50(datetime.strptime(date, "%Y-%m-%d"))

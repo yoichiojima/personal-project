@@ -1,11 +1,17 @@
 import logging
+import google.cloud.logging
+from _auth.google_auth import google_auth
+
+google_auth()
 
 
 class Logger:
     logger = logging.getLogger(__name__)
+    gcloud_logging = google.cloud.logging.Client()
 
     def __init__(self, level=logging.INFO, log_file=None):
         self.logger.setLevel(level)
+        self.gcloud_logging.setup_logging()
 
         if log_file is not None:
             file_handler = logging.FileHandler(log_file)
