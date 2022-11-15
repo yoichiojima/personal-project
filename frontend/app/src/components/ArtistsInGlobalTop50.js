@@ -21,6 +21,9 @@ const ArtistsInGlobalTop50 = ({
   popularity,
   followers,
 }) => {
+
+  const formatter = new Intl.NumberFormat()
+
   return (
     <LinkBox>
       <Card>
@@ -41,12 +44,16 @@ const ArtistsInGlobalTop50 = ({
               <HStack spacing={5}>
                 <HStack>
                   <Heading size="xs">followers</Heading>
-                  <Text>{followers}</Text>
+                  <Text>
+                    {formatter.format(followers)}
+                  </Text>
                 </HStack>
                 <HStack>
                   <Heading size="xs">popularity</Heading>
                   <CircularProgress value={popularity} color="green.400">
-                    <CircularProgressLabel>{popularity}</CircularProgressLabel>
+                    <CircularProgressLabel>
+                      {formatter.format(popularity)}
+                    </CircularProgressLabel>
                   </CircularProgress>
                 </HStack>
               </HStack>
