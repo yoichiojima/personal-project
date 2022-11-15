@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from libs.get_global_top_50 import get_global_top_50
 from libs.get_artist import get_artist
 from libs.get_artists_in_global_top_50 import get_artists_in_global_top_50
+from libs.get_albums_by_artist import get_albums_by_artist
 
 app = FastAPI()
 
@@ -38,3 +39,7 @@ async def artist(artist_id: str) -> dict:
 @app.get("/artists-in-global-top-50/")
 async def artists_in_global_top_50(date: str) -> dict:
     return get_artists_in_global_top_50(datetime.strptime(date, "%Y-%m-%d"))
+
+@app.get("/albums-by-artist/")
+async def albums_by_artist(artist_id: str) -> dict:
+    return get_albums_by_artist(artist_id)
