@@ -11,6 +11,7 @@ import {
   CircularProgressLabel,
   LinkBox,
   LinkOverlay,
+  Wrap,
 } from '@chakra-ui/react';
 
 const ArtistsInGlobalTop50 = ({
@@ -21,8 +22,7 @@ const ArtistsInGlobalTop50 = ({
   popularity,
   followers,
 }) => {
-
-  const formatter = new Intl.NumberFormat()
+  const formatter = new Intl.NumberFormat();
 
   return (
     <LinkBox>
@@ -32,21 +32,21 @@ const ArtistsInGlobalTop50 = ({
             <Avatar src={imageUrl} size="2xl" mr={5} />
             <Box>
               <LinkOverlay href={url}>
-                <Heading size="lg" mb={3}>ß
+                <Heading size="lg" mb={3}>
                   {name}
                 </Heading>
               </LinkOverlay>
-              <HStack spacing={4} mb={3}>
-                {genres.map(genre => (
-                  <Tag key={genre}>{genre}</Tag>
-                ))}
+              <HStack spacing={4} mb={4}>
+                <Wrap>
+                  {genres.map(genre => (
+                    <Tag key={genre}>{genre}</Tag>
+                  ))}
+                </Wrap>
               </HStack>
               <HStack spacing={5}>
                 <HStack>
                   <Heading size="xs">followers</Heading>
-                  <Text>
-                    {formatter.format(followers)}
-                  </Text>
+                  <Text>{formatter.format(followers)}</Text>
                 </HStack>
                 <HStack>
                   <Heading size="xs">popularity</Heading>

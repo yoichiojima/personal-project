@@ -6,14 +6,26 @@ from _auth.get_project_id import get_project_id
 from _auth.google_auth import google_auth
 
 
+def parse_respose(row):
+    res = {}
+    res["url"] = row["external_urls"]["spotify"]
+    res["name"] = row["name"]
+    res["popularity"] = row["popularity"]
+    res["followers"] = row["followers"]["total"]
+    res["genres"] = row["genres"]
+    res["image_url"] = row["images"][0]["url"]
+    return res
+
+
 def get_artists_in_global_top_50(_date: datetime) -> list:
     google_auth()
     project_id = get_project_id()
-    res = download_blob_into_memory(
+    res_from_server = download_blob_into_memory(
         project_id,
         f"spotify/artists_in_global_top_50/{_date.strftime('%Y-%m-%d')}.json",
     )
-    return json.loads(res)
+    res_json = json.loads(res_from_server)
+    return [parse_respose(row) for row in res_json]
 
 
 if __name__ == "__main__":
