@@ -1,12 +1,12 @@
 import { Box, ChakraProvider, theme, Container } from '@chakra-ui/react';
-import ArtistsInGlobalTop50 from './components/ArtistsInGlobalTop50';
+import Artist from './components/Artist';
 
 const App = () => {
   return (
     <Box>
       <ChakraProvider theme={theme}>
         <Container>
-          <ArtistsInGlobalTop50 />
+          <Artist artistId="0TnOYISbd1XYRBk9myaseg" />
         </Container>
       </ChakraProvider>
     </Box>
