@@ -12,8 +12,12 @@ import {
   LinkBox,
   LinkOverlay,
   Flex,
-  Container
+  Container,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const ArtistAvatar = ({ imageUrl }) => {
   return (
@@ -31,8 +35,7 @@ const ArtistHeader = ({ name, popularity, index }) => {
       <HStack justify="space-between">
         <Box>
           <Heading size="lg">
-            {index + 1}. 
-            {name}
+            {index + 1}.{name}
           </Heading>
         </Box>
         <Box maxW="20%">
@@ -80,7 +83,7 @@ const ArtistProfile = ({ name, popularity, genres, followers, index }) => {
   return (
     <Container p={4}>
       <Box mb={3}>
-        <ArtistHeader name={name} popularity={popularity} index={index}/>
+        <ArtistHeader name={name} popularity={popularity} index={index} />
       </Box>
       <Box mb={4}>
         <Genres genres={genres} />
@@ -92,14 +95,14 @@ const ArtistProfile = ({ name, popularity, genres, followers, index }) => {
   );
 };
 
-const ArtistsInGlobalTop50 = ({
+const ArtistInGlobalTop50 = ({
   url,
   name,
   genres,
   imageUrl,
   popularity,
   followers,
-  index
+  index,
 }) => {
   return (
     <LinkBox>
@@ -120,6 +123,52 @@ const ArtistsInGlobalTop50 = ({
         </CardBody>
       </Card>
     </LinkBox>
+  );
+};
+
+const ArtistsInGlobalTop50 = () => {
+  const [artists, setArtists] = useState([
+    {
+      url: '',
+      name: 'Artist Name',
+      genres: [],
+      imageUrl: '',
+      popularity: 0,
+      followers: 0,
+    },
+  ]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/artists-in-global-top-50/?date=2022-11-14')
+      .then(response => {
+        setArtists(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // eslint-disable-next-line
+  }, []);
+
+  return (
+    <Box>
+      <Heading m={4}>Artists in Global Top 50</Heading>
+      <Wrap>
+        {artists.map((artist, index) => (
+          <WrapItem key={index} width={450}>
+            <ArtistInGlobalTop50
+              url={artist.url}
+              name={artist.name}
+              genres={artist.genres}
+              imageUrl={artist.image_url}
+              popularity={artist.popularity}
+              followers={artist.followers}
+              index={index}
+            />
+          </WrapItem>
+        ))}
+      </Wrap>
+    </Box>
   );
 };
 
