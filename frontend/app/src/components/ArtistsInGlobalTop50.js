@@ -32,7 +32,7 @@ const ArtistsInGlobalTop50 = ({
             <Avatar src={imageUrl} size="2xl" mr={5} />
             <Box>
               <LinkOverlay href={url}>
-                <Heading size="lg" mb={3}>
+                <Heading size="lg" mb={3}>ß
                   {name}
                 </Heading>
               </LinkOverlay>
