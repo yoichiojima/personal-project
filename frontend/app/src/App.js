@@ -1,12 +1,13 @@
 import { Box, ChakraProvider, theme, Container } from '@chakra-ui/react';
-import Artist from './components/Artist';
+import Album from './components/Album';
 
 const App = () => {
   return (
     <Box>
       <ChakraProvider theme={theme}>
         <Container>
-          <Artist artistId="0TnOYISbd1XYRBk9myaseg" />
+          <h1>hello</h1>
+          {/* <Album artistId="0LcJLqbBmaGUft1e9Mm8HV" /> */}
         </Container>
       </ChakraProvider>
     </Box>

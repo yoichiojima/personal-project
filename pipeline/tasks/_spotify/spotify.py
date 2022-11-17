@@ -3,6 +3,9 @@ from luigi.contrib.gcs import GCSTarget
 from datetime import datetime
 from _download_top_50_global import download_top_50_global
 from _download_artists_in_global_top_50 import download_artists_in_global_top_50
+from _get_all_audio_features_by_artist import (
+    get_all_audio_features_by_artist
+)
 
 TIMESTAMP = datetime.now().strftime("%Y-%m-%d")
 
@@ -25,6 +28,17 @@ class DownloadArtistGlobalTop50(luigi.Task):
 
     def run(self):
         download_artists_in_global_top_50()
+
+class GetAudioFeaturesByArtist(luigi.Task):
+    artist_id = luigi.Parameter()
+
+    def output(self):
+        return GCSTarget(
+            f"gs://yo-personal-project/spotify/audio_features/{self.artist_id}.json"
+        )
+
+    def run(self):
+        get_all_audio_features_by_artist(self.artist_id)
 
 
 if __name__ == "__main__":

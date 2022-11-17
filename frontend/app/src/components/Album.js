@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Image, Text, Box } from '@chakra-ui/react';
 
-const Artist = ({ artistId }) => {
+const Album = ({ artistId }) => {
   const [name, setName] = useState('');
   const [primaryArtist, setPrimaryArtist] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -29,4 +29,4 @@ const Artist = ({ artistId }) => {
   );
 };
 
-export default Artist;
+export default Album;
