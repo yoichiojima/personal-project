@@ -40,6 +40,7 @@ async def artist(artist_id: str) -> dict:
 async def artists_in_global_top_50(date: str) -> dict:
     return get_artists_in_global_top_50(datetime.strptime(date, "%Y-%m-%d"))
 
+
 @app.get("/albums-by-artist/")
 async def albums_by_artist(artist_id: str) -> dict:
     return get_albums_by_artist(artist_id)

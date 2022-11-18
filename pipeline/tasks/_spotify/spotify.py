@@ -3,9 +3,7 @@ from luigi.contrib.gcs import GCSTarget
 from datetime import datetime
 from _download_top_50_global import download_top_50_global
 from _download_artists_in_global_top_50 import download_artists_in_global_top_50
-from _get_all_audio_features_by_artist import (
-    get_all_audio_features_by_artist
-)
+from _get_all_audio_features_by_artist import get_all_audio_features_by_artist
 
 TIMESTAMP = datetime.now().strftime("%Y-%m-%d")
 
@@ -28,6 +26,7 @@ class DownloadArtistGlobalTop50(luigi.Task):
 
     def run(self):
         download_artists_in_global_top_50()
+
 
 class GetAudioFeaturesByArtist(luigi.Task):
     artist_id = luigi.Parameter()
