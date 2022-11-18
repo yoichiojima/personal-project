@@ -49,11 +49,11 @@ services:
     restart: always
     tty: true
 
-  api:
-    container_name: api
+  backend:
+    container_name: backend
     build:
       context: .
-      dockerfile: ./api/docker/Dockerfile
+      dockerfile: ./backend/docker/Dockerfile
     ports: 
       - 8000:8000
     volumes: 

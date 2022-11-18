@@ -1,8 +1,8 @@
 FROM python:3
 
-COPY ./api/requirements.txt /app/api/requirements.txt
+COPY ./backend/requirements.txt /app/backend/requirements.txt
 RUN pip install --upgrade pip
-RUN pip install -r /app/api/requirements.txt
+RUN pip install -r /app/backend/requirements.txt
 
 COPY ./libs /app/libs
 COPY setup.py /app/setup.py
@@ -12,7 +12,7 @@ COPY ./opt/google_auth.json /opt/google_auth.json
 
 EXPOSE 8000
 
-WORKDIR /app/api
+WORKDIR /app/backend
 
 CMD uvicorn main:app --reload \
                      --host=0.0.0.0 \
