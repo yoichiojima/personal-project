@@ -1,4 +1,3 @@
-import pandas as pd
 from spotipy import (
     Spotify,
     SpotifyClientCredentials
@@ -86,12 +85,25 @@ def retrieve_audio_features(track_id: str) -> dict:
 
 
 def retrieve_audio_features_handler(tracks: list) -> list:
-    return [retrieve_audio_features(i['id']) for i in tracks]
+    return [{
+        'audio_features': retrieve_audio_features(i['id']) , 
+        'track': i
+        }
+        for i in tracks
+    ]
 
 
 class Client:
     @staticmethod
+    def artist(artist_id: str) -> dict:
+        return sp.artist(artist_id)
+
+
+    @staticmethod
     def audio_features_from_artist_id(artist_id: str) -> list:
+        artist = sp.artist(artist_id)
+        artist_name = artist['name']
+
         albums = retrieve_artist_album(artist_id)
         tracks = retrieve_album_tracks_handler(albums)
         print(
@@ -101,11 +113,17 @@ class Client:
             f"Numbers of tracks: {len(tracks)}\n"
             f"{'=' * 50}"
         )
-        res = retrieve_audio_features_handler(tracks)
+        audio_features = retrieve_audio_features_handler(tracks)
+
+        res = {}
+        res['audio_features'] = audio_features
+        res['artist_name'] = artist_name
+        
         return res
 
     @staticmethod
     def audio_features_from_album_id(album_id: str) -> list:
+        album = sp.album(album_id)
         tracks = retrieve_album_tracks(album_id)
         print(
             f"{'=' * 50}\n"
@@ -113,5 +131,10 @@ class Client:
             f"Numbers of tracks: {len(tracks)}\n"
             f"{'=' * 50}"
         )
-        res = retrieve_audio_features_handler(tracks)
+        audio_features = retrieve_audio_features_handler(tracks)
+
+        res = {}
+        res['album'] = album
+        res['audio_features'] = audio_features
+
         return res

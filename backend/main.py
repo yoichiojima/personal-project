@@ -20,3 +20,7 @@ app.add_middleware(
 @app.get("/audio-features-from-album-id/")
 def audio_features_from_album_id(album_id: str) -> list:
     return SpotifyClient.audio_features_from_album_id(album_id)
+
+@app.get('/artist/')
+def artist(artist_name: str) -> dict:
+    return SpotifyClient.artist(artist_name)
