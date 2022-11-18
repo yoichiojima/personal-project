@@ -1,6 +1,7 @@
 import { Box, ChakraProvider, theme, Container } from '@chakra-ui/react';
 import Album from './components/Album';
 
+
 const App = () => {
   return (
     <Box>
