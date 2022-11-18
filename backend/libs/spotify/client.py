@@ -1,12 +1,10 @@
-from spotipy import (
-    Spotify,
-    SpotifyClientCredentials
-)
+import json
+from spotipy import Spotify, SpotifyClientCredentials
 from _spotify.spotipy_auth import spotipy_auth
 
 
 spotipy_auth()
-sp = Spotify(auth_manager = SpotifyClientCredentials())
+sp = Spotify(auth_manager=SpotifyClientCredentials())
 
 
 def retrieve_artist_album(artist_id: str) -> list:
@@ -17,20 +15,18 @@ def retrieve_artist_album(artist_id: str) -> list:
         Returns:
             list: list of albums
     """
+
     def _reduce_albums_to_id_and_name(item: dict) -> dict:
-        return {
-            'id': item['id'], 
-            'name': item['name']
-        }
-    
+        return {"id": item["id"], "name": item["name"]}
+
     albums = []
-    res = sp.artist_albums(artist_id = artist_id)
-    for i in res['items']:
+    res = sp.artist_albums(artist_id=artist_id)
+    for i in res["items"]:
         albums.append(_reduce_albums_to_id_and_name(i))
 
-    while res['next']:
+    while res["next"]:
         res = sp.next(res)
-        for i in res['items']:
+        for i in res["items"]:
             albums.append(_reduce_albums_to_id_and_name(i))
 
     return albums
@@ -45,22 +41,24 @@ def retrieve_album_tracks(album_id: str) -> list:
             list: list of tracks
     """
     tracks = []
-    
-    res = sp.album_tracks(album_id = album_id)
-    for i in res['items']:
+
+    res = sp.album_tracks(album_id=album_id)
+    for i in res["items"]:
         tracks.append(i)
 
-    while res['next']:
+    while res["next"]:
         res = sp.next(res)
-        for i in res['items']:
+        for i in res["items"]:
             tracks.append(i)
 
     response = []
     for tr in tracks:
-        response.append({
-            'id': tr['id'],
-            'name': tr['name'],
-        })
+        response.append(
+            {
+                "id": tr["id"],
+                "name": tr["name"],
+            }
+        )
 
     return response
 
@@ -75,7 +73,7 @@ def retrieve_album_tracks_handler(artist_album: list) -> list:
     """
     tracks = []
     for i in artist_album:
-        tracks = tracks + retrieve_album_tracks(i['id'])
+        tracks = tracks + retrieve_album_tracks(i["id"])
 
     return tracks
 
@@ -85,11 +83,8 @@ def retrieve_audio_features(track_id: str) -> dict:
 
 
 def retrieve_audio_features_handler(tracks: list) -> list:
-    return [{
-        'audio_features': retrieve_audio_features(i['id']) , 
-        'track': i
-        }
-        for i in tracks
+    return [
+        {"audio_features": retrieve_audio_features(i["id"]), "track": i} for i in tracks
     ]
 
 
@@ -98,11 +93,10 @@ class Client:
     def artist(artist_id: str) -> dict:
         return sp.artist(artist_id)
 
-
     @staticmethod
     def audio_features_from_artist_id(artist_id: str) -> list:
         artist = sp.artist(artist_id)
-        artist_name = artist['name']
+        artist_name = artist["name"]
 
         albums = retrieve_artist_album(artist_id)
         tracks = retrieve_album_tracks_handler(albums)
@@ -116,9 +110,9 @@ class Client:
         audio_features = retrieve_audio_features_handler(tracks)
 
         res = {}
-        res['audio_features'] = audio_features
-        res['artist_name'] = artist_name
-        
+        res["audio_features"] = audio_features
+        res["artist_name"] = artist_name
+
         return res
 
     @staticmethod
@@ -134,7 +128,52 @@ class Client:
         audio_features = retrieve_audio_features_handler(tracks)
 
         res = {}
-        res['album'] = album
-        res['audio_features'] = audio_features
+        res["album"] = album
+        res["audio_features"] = audio_features
 
         return res
+
+    @staticmethod
+    def audio_features_from_track_id(track_id: str) -> list:
+        track = sp.track(track_id)
+        audio_features = retrieve_audio_features(track_id)
+
+        res = {}
+        res["track"] = track
+        res["audio_features"] = audio_features
+
+        features = [
+            "danceability",
+            "energy",
+            "loudness",
+            "speechiness",
+            "acousticness",
+            "instrumentalness",
+            "liveness",
+            "valence",
+            "tempo",
+        ]
+
+        chart_values = []
+        for i in audio_features:
+            if i in features:
+                chart_values.append(audio_features[i])
+
+        data = {
+            "options": {
+                "chart": {
+                    "id": "basic-bar",
+                },
+                "xaxis": {
+                    "categories": features,
+                },
+            },
+            "series": [
+                {
+                    "name": "series-1",
+                    "data": chart_values,
+                },
+            ],
+        }
+
+        return data

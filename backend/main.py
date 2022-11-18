@@ -1,4 +1,3 @@
-from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from libs.spotify.client import Client as SpotifyClient
@@ -17,10 +16,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/audio-features-from-album-id/")
 def audio_features_from_album_id(album_id: str) -> list:
     return SpotifyClient.audio_features_from_album_id(album_id)
 
-@app.get('/artist/')
-def artist(artist_name: str) -> dict:
-    return SpotifyClient.artist(artist_name)
+
+@app.get("/artist/")
+def artist(artist_id: str) -> dict:
+    return SpotifyClient.artist(artist_id)
+
+
+@app.get("/rader-chart/")
+def rader_chart(track_id: str) -> list:
+    return SpotifyClient.audio_features_from_track_id(track_id)
