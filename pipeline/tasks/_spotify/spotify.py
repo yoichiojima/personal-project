@@ -1,9 +1,13 @@
 import luigi
 from luigi.contrib.gcs import GCSTarget
 from datetime import datetime
-from _download_top_50_global import download_top_50_global
-from _download_artists_in_global_top_50 import download_artists_in_global_top_50
-from _get_all_audio_features_by_artist import get_all_audio_features_by_artist
+from prototypes._download_top_50_global import download_top_50_global
+from prototypes._download_artists_in_global_top_50 import (
+    download_artists_in_global_top_50,
+)
+from prototypes._get_all_audio_features_by_artist import (
+    get_all_audio_features_by_artist,
+)
 
 TIMESTAMP = datetime.now().strftime("%Y-%m-%d")
 

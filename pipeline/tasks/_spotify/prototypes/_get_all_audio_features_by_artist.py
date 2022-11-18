@@ -18,7 +18,6 @@ spotipy_auth()
 google_auth()
 
 sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
-artist_id = "3WrFJ7ztbogyGnTHbHJFl2"
 
 
 def _get_albums(artist_id: str) -> list:
@@ -87,11 +86,15 @@ def store_albums(albums, artist_id):
         index=False,
         encoding="utf-8",
     )
+
     logger.info(f"gs://spotify/albums/{artist_id}.csv uploaded.")
 
 
-def get_albums_tracks(album_ids):
+def get_albums_tracks(album_ids, limit=None):
     tracks = []
+
+    if limit is not None:
+        album_ids = album_ids[:limit]
 
     for i in tqdm(album_ids, desc="downloading tracks data"):
         result = _get_tracks(i)
@@ -107,14 +110,18 @@ def store_tracks(tracks, artist_id):
         index=False,
         encoding="utf-8",
     )
+
     logger.info(f"gs://{get_project_id()}/spotify/tracks/{artist_id}.csv uploaded.")
 
 
-def get_audio_features(track_ids: list) -> pd.DataFrame:
+def get_audio_features(track_ids: list, limit: int = None) -> pd.DataFrame:
     audio_features = []
+
+    if limit is not None:
+        track_ids = track_ids[:limit]
+
     for i in tqdm(track_ids, desc="downloading audio features"):
-        for i in sp.audio_features(i):
-            audio_features.append(i)
+        audio_features = audio_features + [f for f in sp.audio_features(i)]
 
     return pd.DataFrame(audio_features)
 
@@ -125,19 +132,27 @@ def store_audio_features(audio_features: pd.DataFrame, artist_id: int):
         index=False,
         encoding="utf-8",
     )
+
     logger.info(f"audio_features/{artist_id}.csv uploaded.")
 
 
-def get_all_audio_features_by_artist(artist_id: str):
+def get_all_audio_features_by_artist(
+    artist_id: str, limit_tracks_features: int = None, limit_albums: int = None
+):
+
     albums = _get_albums(artist_id)
     store_albums(albums, artist_id)
 
     album_ids = [i["id"] for i in albums]
-    tracks = get_albums_tracks(album_ids)
+
+    tracks = get_albums_tracks(album_ids, limit=limit_albums)
+
     store_tracks(tracks, artist_id)
 
     track_ids = [i["id"] for i in tracks]
-    audio_features = get_audio_features(track_ids)
+
+    audio_features = get_audio_features(track_ids, limit=limit_tracks_features)
+
     store_audio_features(audio_features, artist_id)
 
 
