@@ -8,6 +8,9 @@ from prototypes._download_artists_in_global_top_50 import (
 from prototypes._get_all_audio_features_by_artist import (
     get_all_audio_features_by_artist,
 )
+from prototypes._retrieve_audio_features_global import (
+    retrieve_audio_features_global,
+)
 
 TIMESTAMP = datetime.now().strftime("%Y-%m-%d")
 
@@ -42,6 +45,16 @@ class GetAudioFeaturesByArtist(luigi.Task):
 
     def run(self):
         get_all_audio_features_by_artist(self.artist_id)
+
+
+class RetrieveAudioFeaturesGlobal(luigi.Task):
+    def output(self):
+        return GCSTarget(
+            f"gs://yo-personal-project/spotify/global_audio_features/{TIMESTAMP}.csv"
+        )
+
+    def run(self):
+        retrieve_audio_features_global()
 
 
 if __name__ == "__main__":

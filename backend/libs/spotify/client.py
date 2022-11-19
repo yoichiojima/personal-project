@@ -1,6 +1,12 @@
-import json
+from datetime import datetime
+import pandas as pd
 from spotipy import Spotify, SpotifyClientCredentials
 from _spotify.spotipy_auth import spotipy_auth
+from _auth.google_auth import google_auth
+from _auth.get_project_id import get_project_id
+from _logging.logger import Logger
+
+logger = Logger()
 
 
 spotipy_auth()
@@ -88,10 +94,12 @@ def retrieve_audio_features_handler(tracks: list) -> list:
     ]
 
 
+
 class Client:
     @staticmethod
     def artist(artist_id: str) -> dict:
         return sp.artist(artist_id)
+
 
     @staticmethod
     def audio_features_from_artist_id(artist_id: str) -> list:
@@ -115,6 +123,7 @@ class Client:
 
         return res
 
+
     @staticmethod
     def audio_features_from_album_id(album_id: str) -> list:
         album = sp.album(album_id)
@@ -132,6 +141,7 @@ class Client:
         res["audio_features"] = audio_features
 
         return res
+
 
     @staticmethod
     def audio_features_from_track_id(track_id: str) -> list:
@@ -177,3 +187,4 @@ class Client:
         }
 
         return data
+

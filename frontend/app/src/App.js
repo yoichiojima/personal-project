@@ -32,13 +32,13 @@ const App = () => {
   return (
     <Box>
       <ChakraProvider theme={theme}>
-        <Text>Hello World!</Text>
+        {/* <Text>Hello World!</Text>
         <Chart
           options={data.options}
           series={data.series}
           type="bar"
           width="500"
-        />
+        /> */}
       </ChakraProvider>
     </Box>
   );
