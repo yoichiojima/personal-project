@@ -12,6 +12,9 @@ spotipy_auth()
 sp = Spotify(auth_manager=SpotifyClientCredentials())
 
 
+google_auth()
+
+
 def retrieve_artist_album(artist_id: str) -> list:
     """
     Returns a list of albums for an artist
@@ -93,7 +96,6 @@ def retrieve_audio_features_handler(tracks: list) -> list:
     ]
 
 
-# Standardise audio features
 def _standardise(audio_features: pd.DataFrame, reference: pd.DataFrame) -> pd.DataFrame:
     metrics = [
         "danceability",
@@ -118,8 +120,52 @@ def _standardise(audio_features: pd.DataFrame, reference: pd.DataFrame) -> pd.Da
 
 class Client:
     @staticmethod
+    def search(query: str) -> dict:
+        return sp.search(query)
+
+    @staticmethod
     def artist(artist_id: str) -> dict:
         return sp.artist(artist_id)
+
+    @staticmethod
+    def artist_related_artists(artist_id: str) -> dict:
+        sp.artist_related_artists(artist_id)
+
+    @staticmethod
+    def artist_top_tracks(artist_id: str) -> dict:
+        sp.artist_top_tracks(artist_id)
+
+    @staticmethod
+    def audio_analysis(track_id: str) -> dict:
+        return sp.audio_analysis(track_id)
+
+    @staticmethod
+    def new_releases() -> dict:
+        return sp.new_releases()
+
+    @staticmethod
+    def audio_analysis(track_id: str) -> dict:
+        return sp.audio_analysis(track_id)
+
+    @staticmethod
+    def artist_albums(artist_id: str) -> list:
+        return sp.artist_albums(artist_id)
+
+    @staticmethod
+    def track(track_id: str) -> dict:
+        return sp.track(track_id)
+
+    @staticmethod
+    def album(album_id: str) -> dict:
+        return sp.album(album_id)
+
+    @staticmethod
+    def album_tracks(album_id: str) -> dict:
+        return sp.album_tracks(album_id)
+
+    @staticmethod
+    def audio_features(track_id: str) -> dict:
+        return sp.audio_features(track_id)
 
     @staticmethod
     def audio_features_from_artist_id(artist_id: str) -> list:
@@ -162,57 +208,7 @@ class Client:
         return res
 
     @staticmethod
-    def audio_features_from_track_id(track_id: str) -> list:
-        track = sp.track(track_id)
-        audio_features = retrieve_audio_features(track_id)
-
-        res = {}
-        res["track"] = track
-        res["audio_features"] = audio_features
-
-        features = [
-            "danceability",
-            "energy",
-            "loudness",
-            "speechiness",
-            "acousticness",
-            "instrumentalness",
-            "liveness",
-            "valence",
-            "tempo",
-        ]
-
-        chart_values = []
-        for i in audio_features:
-            if i in features:
-                chart_values.append(audio_features[i])
-
-        data = {
-            "options": {
-                "chart": {
-                    "id": "basic-bar",
-                },
-                "xaxis": {
-                    "categories": features,
-                },
-            },
-            "series": [
-                {
-                    "name": "series-1",
-                    "data": chart_values,
-                },
-            ],
-        }
-
-        return data
-
-    @staticmethod
     def retrieve_audio_features_global():
-        google_auth()
-        spotipy_auth()
-
-        sp = Spotify(auth_manager=SpotifyClientCredentials())
-
         res = sp.playlist_items("37i9dQZEVXbMDoHDwVN2tF", limit=50)
 
         tracks = [
@@ -271,10 +267,7 @@ class Client:
         return df.to_dict()
 
     @staticmethod
-    def retirieve_standardised_audio_features(track_id: str) -> dict:
-        google_auth()
-        spotipy_auth()
-
+    def standardised_audio_features(track_id: str) -> dict:
         # Get Reference
         global_top = pd.read_csv(
             "gs://yo-personal-project/spotify/audio_features/37i9dQZEVXbMDoHDwVN2tF/2022-11-20.csv"
