@@ -188,3 +188,62 @@ class Client:
 
         return data
 
+
+    @staticmethod
+    def retrieve_audio_features_global():
+        google_auth()
+        spotipy_auth()
+
+        sp = Spotify(
+            auth_manager = SpotifyClientCredentials()
+        )
+
+        res = sp.playlist_items('37i9dQZEVXbMDoHDwVN2tF', limit = 50)
+
+        tracks = [{
+            'id' : i['track']['id'], 
+            'name': i['track']['name'], 
+            'artist': i['track']['artists'][0]['name']
+        } for i in res['items']]
+
+        audio_features = [{
+            'name': i['name'], 
+            'artist': i['artist'], 
+            'features': sp.audio_features(i['id'])
+        } for i in tracks]
+
+        dfs = []
+        for i in audio_features:
+            df = pd.DataFrame(i['features'])
+            df['name'] = i['name']
+            df['artist'] = i['artist']
+            dfs.append(df)
+
+        df = pd.concat(dfs)
+
+
+        df = df[[
+            'id',
+            'name',
+            'artist',
+            'key',
+            'mode',
+            'tempo',
+            'danceability',
+            'energy',
+            'loudness',
+            'speechiness',
+            'acousticness',
+            'instrumentalness',
+            'liveness',
+            'valence',
+            'duration_ms',
+            'time_signature',
+        ]]
+
+        df = df.describe()
+        df = pd.concat([df.mean(), df.std()], axis = 1)
+
+        df.columns = ['mean', 'std']
+        
+        return df.to_dict()
