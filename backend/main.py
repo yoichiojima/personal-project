@@ -27,8 +27,8 @@ def artist(artist_id: str) -> dict:
     return SpotifyClient.artist(artist_id)
 
 
-@app.get("/rader-chart/")
-def rader_chart(track_id: str) -> list:
+@app.get("/audio_features_from_track_id/")
+def audio_features_from_track_id(track_id: str) -> list:
     return SpotifyClient.audio_features_from_track_id(track_id)
 
 
