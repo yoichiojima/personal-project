@@ -1,9 +1,6 @@
 from datetime import datetime
 import pandas as pd
 from spotipy import Spotify, SpotifyClientCredentials
-from _spotify.rertireve_standardised_audio_features import (
-    retirieve_standardised_audio_features,
-)
 from _spotify.spotipy_auth import spotipy_auth
 from _auth.google_auth import google_auth
 from _logging.logger import Logger
