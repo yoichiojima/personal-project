@@ -8,3 +8,4 @@ db/data/*
 *.egg-info
 node_modules
 google_auth.json
+.pytest_cache
