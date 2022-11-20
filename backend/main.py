@@ -32,6 +32,6 @@ def rader_chart(track_id: str) -> list:
     return SpotifyClient.audio_features_from_track_id(track_id)
 
 
-@app.get('/retrieve_audio_features_global/')
+@app.get("/retrieve_audio_features_global/")
 def retrieve_audio_features_global():
     return SpotifyClient.retrieve_audio_features_global()

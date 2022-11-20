@@ -1,1 +1,1 @@
-from . import _spotify
+import spotify
