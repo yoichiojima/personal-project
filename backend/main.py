@@ -77,11 +77,11 @@ def audio_features_from_album_id(album_id: str) -> list:
     return SpotifyClient.audio_features_from_album_id(album_id)
 
 
-@app.get("/retrieve_audio_features_global/")
-def retrieve_audio_features_global():
+@app.get("/audio_features_global/")
+def audio_features_global():
     return SpotifyClient.retrieve_audio_features_global()
 
 
 @app.get("/standardised_audio_features/")
-def retrieve_standardised_audio_features(track_id: str):
+def standardised_audio_features(track_id: str):
     return SpotifyClient.standardised_audio_features(track_id)

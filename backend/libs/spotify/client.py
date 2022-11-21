@@ -24,18 +24,17 @@ def retrieve_artist_album(artist_id: str) -> list:
             list: list of albums
     """
 
-    def _reduce_albums_to_id_and_name(item: dict) -> dict:
-        return {"id": item["id"], "name": item["name"]}
+    extract_id_and_name = lambda x: {"id": x["id"], "name": x["name"]}
 
     albums = []
     res = sp.artist_albums(artist_id=artist_id)
     for i in res["items"]:
-        albums.append(_reduce_albums_to_id_and_name(i))
+        albums.append(extract_id_and_name(i))
 
     while res["next"]:
         res = sp.next(res)
         for i in res["items"]:
-            albums.append(_reduce_albums_to_id_and_name(i))
+            albums.append(extract_id_and_name(i))
 
     return albums
 
