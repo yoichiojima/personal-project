@@ -78,7 +78,7 @@ def audio_features_from_album_id(album_id: str) -> list:
 
 
 @app.get("/audio_features_global/")
-def audio_features_global():
+def åaudio_features_global():
     return SpotifyClient.retrieve_audio_features_global()
 
 

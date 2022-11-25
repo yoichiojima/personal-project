@@ -1,23 +1,12 @@
-import { 
-  Box, 
-  ChakraProvider, 
-  theme, 
-  Text, 
-  Container,
-  Heading 
-} from '@chakra-ui/react';
+import { Box, ChakraProvider, theme, Container } from '@chakra-ui/react';
+import Search from './components/Search';
 
 const App = () => {
   return (
     <Box>
       <ChakraProvider theme={theme}>
         <Container>
-          <Heading>
-            heading
-          </Heading>
-          <Text>
-            text
-          </Text>
+          <Search />
         </Container>
       </ChakraProvider>
     </Box>
