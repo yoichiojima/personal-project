@@ -3,6 +3,7 @@ class ApexChart:
         self.res = {
             "options": {},
             "series": {},
+            "type": ''
         }
 
     def set_options(self, options):

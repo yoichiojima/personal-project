@@ -48,11 +48,13 @@ def monthly_multiple_series():
         {"data": [randint(0, 100) for _ in range(12)]},
         {"data": [randint(0, 100) for _ in range(12)]}
     ])
+
     return apx.res
 
 @app.get("/radar")
 def radar():
     apx = ApexChart()
+
     apx.set_options({
         'labels': ['April', 'May', 'June', 'July', 'August', 'September'], 
         'theme': {
@@ -60,8 +62,10 @@ def radar():
             'palette': 'palette2'
         }
     })
+    
     apx.set_series_data([
         {"data": [randint(0, 100) for _ in range(6)]},
         {"data": [randint(0, 100) for _ in range(6)]}
     ])
+    
     return apx.res
