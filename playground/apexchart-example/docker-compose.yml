@@ -1,0 +1,12 @@
+services:
+  react:
+    container_name: apex-charts
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    restart: always
+    tty: true
