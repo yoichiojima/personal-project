@@ -15,9 +15,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-apx = ApexChart()
-
 
 @app.get("/test")
 def test():
-    return apx
+    apx = ApexChart()
+    apx.set_data([100, 200, 350, 330, 400])
+    return apx.data
