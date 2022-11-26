@@ -19,8 +19,8 @@ app.add_middleware(
 @app.get("/test")
 def test():
     apx = ApexChart()
-    apx.set_chart_id('chart_id')
-    apx.set_xaxis_categories(['a', 'b', 'c'])
-    apx.set_series_name('series_name')
+    apx.set_chart_id("chart_id")
+    apx.set_xaxis_categories(["a", "b", "c"])
+    apx.set_series_name("series_name")
     apx.set_series_data([1, 2, 3])
     return apx.res
