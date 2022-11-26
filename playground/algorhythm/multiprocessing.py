@@ -1,3 +1,5 @@
+## See how effective the multiprocessing is
+
 from multiprocessing import Pool, cpu_count
 import time
 
