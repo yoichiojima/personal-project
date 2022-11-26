@@ -6,7 +6,7 @@ import {
   Container
 } from "@chakra-ui/react";
 
-const LineChart = () => {
+const AreaChart = () => {
   const [data, setData] = useState({
     options: {},
     series: [{ data: [] }]
@@ -28,11 +28,11 @@ const LineChart = () => {
     <div className="App">
       <ChakraProvider>
         <Container>
-          <Chart series={data.series} options={data.options} type='line'/>
+          <Chart series={data.series} options={data.options} type='area'/>
         </Container>
       </ChakraProvider>
     </div>
   );
 };
 
-export default LineChart;
+export default AreaChart;

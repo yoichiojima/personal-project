@@ -6,7 +6,7 @@ import {
   Container
 } from "@chakra-ui/react";
 
-const LineChart = () => {
+const Radar = () => {
   const [data, setData] = useState({
     options: {},
     series: [{ data: [] }]
@@ -14,7 +14,7 @@ const LineChart = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/monthly_multiple_series")
+      .get("http://localhost:8000/radar")
       .then((response) => {
         setData(response.data);
       })
@@ -28,11 +28,11 @@ const LineChart = () => {
     <div className="App">
       <ChakraProvider>
         <Container>
-          <Chart series={data.series} options={data.options} type='line'/>
+          <Chart series={data.series} options={data.options} type='radar'/>
         </Container>
       </ChakraProvider>
     </div>
   );
 };
 
-export default LineChart;
+export default Radar;
