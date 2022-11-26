@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ChakraProvider, Container } from "@chakra-ui/react";
+import { ChakraProvider, Container, Heading, Image } from "@chakra-ui/react";
 import Chart from "react-apexcharts";
 
 const App = () => {
   const [data, setData] = useState({
+    track: {
+      name: ""
+    }, 
     series: [],
     options: {},
   });
@@ -27,6 +30,10 @@ const App = () => {
     <>
       <ChakraProvider>
         <Container>
+          <Heading>
+            {data.track.name}
+          </Heading>
+          <Image src={data.track.album.images[0].url} />
           <Chart series={data.series} options={data.options} type="radar" />
         </Container>
       </ChakraProvider>

@@ -288,6 +288,7 @@ class Client:
 
         # Get audio features from track_id
         sp = Spotify(auth_manager=SpotifyClientCredentials())
+        track = sp.track(track_id)
         audio_features = pd.DataFrame(sp.audio_features(tracks=track_id))
 
         # Standardise audio features by global 50
@@ -314,6 +315,7 @@ class Client:
         print(label)
 
         return {
+            "track": track, 
             "series": [
                 {
                     "name": name,
