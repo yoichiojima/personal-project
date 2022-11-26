@@ -3,10 +3,22 @@ services:
     container_name: apex-charts
     build: 
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/react/Dockerfile
     ports:
       - 3000:3000
     volumes:
-      - ./:/app
+      - ./frontend/:/app
+    restart: always
+    tty: true
+
+  fastapi:
+    container_name: apex-api
+    build: 
+      context: .
+      dockerfile: ./docker/fastapi/Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/:/app
     restart: always
     tty: true
