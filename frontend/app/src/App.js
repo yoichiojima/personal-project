@@ -6,8 +6,9 @@ import Chart from "react-apexcharts";
 const App = () => {
   const [data, setData] = useState({
     track: {
-      name: ""
-    }, 
+      name: "",
+      images: "",
+    },
     series: [],
     options: {},
   });
@@ -30,10 +31,8 @@ const App = () => {
     <>
       <ChakraProvider>
         <Container>
-          <Heading>
-            {data.track.name}
-          </Heading>
-          <Image src={data.track.album.images[0].url} />
+          <Heading>{data.track.name}</Heading>
+          <Image src={data.track.image} />
           <Chart series={data.series} options={data.options} type="radar" />
         </Container>
       </ChakraProvider>

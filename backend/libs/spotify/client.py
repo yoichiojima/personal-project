@@ -315,7 +315,10 @@ class Client:
         print(label)
 
         return {
-            "track": track, 
+            "track": {
+                "name": track["name"],
+                "image": track["album"]["images"][0]["url"],
+            },
             "series": [
                 {
                     "name": name,
