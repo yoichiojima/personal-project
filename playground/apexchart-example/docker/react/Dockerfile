@@ -1,5 +1,5 @@
 FROM node:latest
 
-WORKDIR /app/code
+WORKDIR /app
 
 CMD npm start

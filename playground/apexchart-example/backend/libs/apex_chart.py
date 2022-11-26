@@ -1,20 +1,30 @@
 class ApexChart:
     def __init__(self):
-        self.data = {
-            'series': {
-                'data': []
+        self.res = {
+            'options': {
+                'chart': {
+                    'id': ''
+                }, 
+                'xaxis': {
+                    'categories': []
+                }
             }, 
-            'xaxis': {
-                'type': ''
-            },
-            'labels': []
+            'series': [
+                {
+                    'name': '', 
+                    'data': []
+                }
+            ]
         }
 
-    def set_data(self, data):
-        self.data['series']['data'] = data
+    def set_chart_id(self, chart_id: str):
+        self.res['options']['chart']['id'] = chart_id
 
-    def set_xaxis_type(self, xaxis_type):
-        self.data['xaxis']['type'] = xaxis_type
+    def set_xaxis_categories(self, categories: str):
+        self.res['options']['xaxis']['categories'] = categories
 
-    def set_labels(self, labels):
-        self.data['labels'] = labels
+    def set_series_name(self, name: str):
+        self.res['series'][0]['name'] = name
+
+    def set_series_data(self, data: list):
+        self.res['series'][0]['data'] = data
