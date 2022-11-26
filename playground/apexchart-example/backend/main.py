@@ -19,8 +19,24 @@ app.add_middleware(
 @app.get("/test")
 def test():
     apx = ApexChart()
-    apx.set_chart_id("chart_id")
-    apx.set_xaxis_categories(["a", "b", "c"])
-    apx.set_series_name("series_name")
-    apx.set_series_data([1, 2, 3])
+    apx.set_options(
+        id="basic-bar",
+        categories=[
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ],
+        background="#f4f4f4",
+        fore_color="#333",
+    )
+    apx.set_series_data([{"data": [44, 55, 41, 67, 22, 43, 21, 49, 44, 62, 21, 49]}])
     return apx.res
