@@ -278,3 +278,47 @@ class Client:
 
         # Standardise audio features by global 50
         return _standardise(audio_features, global_top)
+
+    @staticmethod
+    def standardised_audio_features_radar(track_id: str) -> dict:
+        # Get Reference
+        global_top = pd.read_csv(
+            "gs://yo-personal-project/spotify/audio_features/37i9dQZEVXbMDoHDwVN2tF/2022-11-20.csv"
+        ).set_index("feature")
+
+        # Get audio features from track_id
+        sp = Spotify(auth_manager=SpotifyClientCredentials())
+        audio_features = pd.DataFrame(sp.audio_features(tracks=track_id))
+
+        # Standardise audio features by global 50
+        std_features = _standardise(audio_features, global_top)
+
+        filtered_data = {}
+        for i in std_features:
+            if i in [
+                "danceability",
+                "energy",
+                "loudness",
+                "speechiness",
+                "acousticness",
+                "instrumentalness",
+                "liveness",
+                "valence",
+            ]:
+                filtered_data[i] = int(std_features[i] * 100)
+
+        label = list(filtered_data.keys())
+        data = list(filtered_data.values())
+        name = "audio features"
+
+        print(label)
+
+        return {
+            "series": [
+                {
+                    "name": name,
+                    "data": data,
+                }
+            ],
+            "options": {"labels": label},
+        }

@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from libs.apex_chart import ApexChart
 from random import randint
 
 
@@ -19,10 +18,10 @@ app.add_middleware(
 
 @app.get("/monthly_multiple_series")
 def monthly_multiple_series():
-    apx = ApexChart()
-    apx.set_options({
-        'chart': {
-            'id': "basic-bar",
+    res = {}
+    res["options"] = {
+        "chart": {
+            "id": "basic-bar",
             "categories": [
                 "Jan",
                 "Feb",
@@ -35,37 +34,31 @@ def monthly_multiple_series():
                 "Sep",
                 "Oct",
                 "Nov",
-                "Dec"
-            ], 
-            'foreColor': 'black'
-        }, 
-        'theme': {
-            'mode': 'dark', 
-            'palette': 'palette2'
-        }
-    })
-    apx.set_series_data([
+                "Dec",
+            ],
+            "foreColor": "black",
+        },
+        "theme": {"mode": "dark", "palette": "palette2"},
+    }
+    res["series"] = [
         {"data": [randint(0, 100) for _ in range(12)]},
-        {"data": [randint(0, 100) for _ in range(12)]}
-    ])
+        {"data": [randint(0, 100) for _ in range(12)]},
+    ]
 
-    return apx.res
+    return res
+
 
 @app.get("/radar")
 def radar():
-    apx = ApexChart()
+    res = {}
+    res["options"] = {
+        "labels": ["April", "May", "June", "July", "August", "September"],
+        "theme": {"mode": "light", "palette": "palette2"},
+    }
 
-    apx.set_options({
-        'labels': ['April', 'May', 'June', 'July', 'August', 'September'], 
-        'theme': {
-            'mode': 'light', 
-            'palette': 'palette2'
-        }
-    })
-    
-    apx.set_series_data([
+    res["series"] = [
         {"data": [randint(0, 100) for _ in range(6)]},
-        {"data": [randint(0, 100) for _ in range(6)]}
-    ])
-    
-    return apx.res
+        {"data": [randint(0, 100) for _ in range(6)]},
+    ]
+
+    return res

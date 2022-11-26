@@ -85,3 +85,8 @@ def åaudio_features_global():
 @app.get("/standardised_audio_features/")
 def standardised_audio_features(track_id: str):
     return SpotifyClient.standardised_audio_features(track_id)
+
+
+@app.get("/standardised_audio_features_radar/")
+def standardised_audio_features_radar(track_id: str):
+    return SpotifyClient.standardised_audio_features_radar(track_id)

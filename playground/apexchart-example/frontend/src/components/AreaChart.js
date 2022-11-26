@@ -16,6 +16,7 @@ const AreaChart = () => {
     axios
       .get("http://localhost:8000/monthly_multiple_series")
       .then((response) => {
+        console.log(response.data)
         setData(response.data);
       })
       .catch((error) => {
