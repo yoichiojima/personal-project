@@ -32,7 +32,6 @@ const App = () => {
       <ChakraProvider>
         <Container>
           <Heading>{data.track.name}</Heading>
-          <Image src={data.track.image} />
           <Chart series={data.series} options={data.options} type="radar" />
         </Container>
       </ChakraProvider>
