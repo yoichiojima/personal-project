@@ -1,6 +1,5 @@
 .ipynb_checkpoints
 __pycache__
-spotipy_auth.py
 .DS_Store
 .venv
 db/data/*
@@ -11,3 +10,4 @@ google_auth.json
 .pytest_cache
 data
 reference
+spotify.ini
